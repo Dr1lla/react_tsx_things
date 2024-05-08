@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 
-const Recipes: FC = () => {
+const Products: FC = () => {
     return (
         <div>
 
@@ -8,4 +8,4 @@ const Recipes: FC = () => {
     );
 };
 
-export default Recipes;
+export default Products;
