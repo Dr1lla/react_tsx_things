@@ -15,10 +15,20 @@ export interface IProductsProps {
 }
 
 type ITypeProductsProps = IProductsProps & { children?: React.ReactNode}
-export const Product: FC<ITypeProductsProps> = ({id, title, price, discountPercentage, rating,}) => {
+export const Product: FC<ITypeProductsProps> = ({id,
+                                                    title,
+                                                    price,
+                                                    discountPercentage,
+                                                    rating,
+                                                    description,
+                                                    stock,}) => {
     return (
         <div>
-            <h2>{id}. {title}. {price}. {discountPercentage}. {rating}.</h2>
+            <h2>{id}. {title}</h2>
+            <p> <b>Rating - {rating}</b></p>
+            <p>Stock - {stock}</p>
+            <p>{description}.</p>
+            <p> <b>${price}. Discount - -%{discountPercentage}.</b></p>
         </div>
     );
 };

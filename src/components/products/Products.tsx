@@ -16,8 +16,9 @@ const Products: FC = () => {
     return (
         <div>
             {
-                products.map(({id, title, price, discountPercentage, rating}: IProductsProps) => (
-                    <Product key={id} id={id} title={title} price={price} discountPercentage={discountPercentage} rating={rating}/>))
+                products.map(({id, title, price, discountPercentage, rating, description, stock}: IProductsProps) => (
+                    <Product key={id} id={id} title={title} price={price} discountPercentage={discountPercentage}
+                             rating={rating} description={description} stock={stock}/>))
             }
         </div>
     );
