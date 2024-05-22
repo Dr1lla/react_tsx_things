@@ -1,24 +1,24 @@
 import React, {FC, useEffect, useState} from 'react';
-import {IProductsProps, Product} from "../product/Product";
+import {Product} from "../product/Product";
+import {IProductsProps} from "../models/Product.model";
+import {getAllProducts} from "../service/products.api.service";
 
 const Products: FC = () => {
 
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState<IProductsProps[]>([]);
+
     useEffect(() => {
-        fetch('https://dummyjson.com/products')
-            .then(value => value.json())
-            .then(({products}) => {
-                setProducts(products);
-            });
+        getAllProducts().then(value => setProducts(value.data.products));
     }, []);
-    console.log('test')
+
+    console.log('test');
 
     return (
         <div>
             {
-                products.map(({id, title, price, discountPercentage, rating, description, stock}: IProductsProps) => (
-                    <Product key={id} id={id} title={title} price={price} discountPercentage={discountPercentage}
-                             rating={rating} description={description} stock={stock}/>))
+                products.map((value: IProductsProps) => (
+                    <Product key={value.id} id={value.id} title={value.title} price={value.price} discountPercentage={value.discountPercentage}
+                             rating={value.rating} description={value.description} stock={value.stock}/>))
             }
         </div>
     );
