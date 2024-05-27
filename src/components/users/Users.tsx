@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
-import { IPropsUsers } from "../interfaces/User.interface";
+import { IUser } from "../interfaces/User.interface";
 import UserComponent from "../user/UserComponent";
 import {getUsers} from "../../services/User.api.services";
 
 
 const Users: FC = () => {
 
-    const [users, setUser] = useState<IPropsUsers[]>([]);
+    const [users, setUser] = useState<IUser[]>([]);
 
     useEffect(() => {
         getUsers().then(data => {
