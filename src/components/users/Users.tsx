@@ -1,17 +1,19 @@
 import React, { FC, useEffect, useState } from 'react';
 import { IPropsUsers } from "../interfaces/User.interface";
 import UserComponent from "../user/UserComponent";
+import {getUsers} from "../../services/User.api.services";
+
 
 const Users: FC = () => {
 
     const [users, setUser] = useState<IPropsUsers[]>([]);
 
     useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then(response => response.json())
-            .then(data => {
-                setUser(data);
-            });
+        getUsers().then(data => {
+            setUser(data);
+        }).catch(error => {
+            console.error('Error fetching users:', error);
+        });
 
         return () => {
             console.log('end');
