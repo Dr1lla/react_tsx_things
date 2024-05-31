@@ -1,13 +1,15 @@
-import React, {FC, ReactNode} from 'react';
-import {IPost} from "../interfaces/Post.interface";
+import React, { FC } from 'react';
+import { IPost } from "../interfaces/Post.interface";
 
-type IPostProps = { post: IPost } & { children?: ReactNode};
-const PostComponent: FC<IPostProps> = ({post}) => {
+const PostComponent: FC<IPost> = ({ id, userId, title, body }) => {
     return (
         <div>
-
+            <h3>{title}</h3>
+            <p>{body}</p>
         </div>
     );
 };
 
 export default PostComponent;
+
+export {};

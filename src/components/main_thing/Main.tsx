@@ -1,16 +1,28 @@
 import React, { FC, useEffect, useState } from 'react';
 import { IUser } from "../interfaces/User.interface";
 import UserComponent from "../user/UserComponent";
-import {getUsers} from "../../services/User.api.services";
+import {getUsers} from "../services/User.api.services";
+import PostsComponent from "../posts/PostsComponent";
+import {IPost} from "../interfaces/Post.interface";
+import {getPostOfUser} from "../services/Post.api.services";
 
 
-const Users: FC = () => {
+const Main: FC = () => {
 
     const [users, setUser] = useState<IUser[]>([]);
+    const [posts, setPosts] = useState<IPost[]>([]);
+    const [userId, setUserId] = useState<number>(0);
+
+    useEffect(() => {
+        if (userId !== 0){
+            getPostOfUser(userId)
+                .then(value => setPosts(value.data));
+        }
+    }, [userId]);
 
     useEffect(() => {
         getUsers().then(data => {
-            setUser(data);
+            setUser(data.data);
         }).catch(error => {
             console.error('Error fetching users:', error);
         });
@@ -19,8 +31,6 @@ const Users: FC = () => {
             console.log('end');
         }
     }, []);
-
-    const [userId, setUserId] = useState<number>(0)
 
     const clickHandler = (id:number) => {
         setUserId(id);
@@ -40,9 +50,12 @@ const Users: FC = () => {
                     />
                 ))
             }
-            <p>{userId}</p>
+
+            <p>
+                <PostsComponent posts={posts}/>
+            </p>
         </>
     );
 };
 
-export default Users;
+export default Main;
